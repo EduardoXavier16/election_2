@@ -1,0 +1,108 @@
+const prompt = require ('prompt-sync') ();
+
+var pergunta = "sim"
+var candidato1 = 0;
+var candidato2 = 0;
+var candidato3 = 0;
+var voto_nulo = 0;
+var voto_branco = 0;
+
+
+
+function autorizaVoto (anoNascimento) {
+
+    let idade = 2021 - anoNascimento;
+    if (idade <16) {return "Negado";}
+    else if (idade == 16) {return "Opcional!";}
+    else {return "Obrigatório!";}
+ 
+ }
+
+
+    let idade = autorizaVoto (anoNascimento);
+
+
+function votacao (autorizacao, voto) {
+
+    autorizacao = autorizaVoto (anoNascimento);
+    if (autorizacao === "Negado") {
+
+        console.log ("Você não pode votar!");
+        return autorizaVoto ();
+    }
+    else {
+
+        console.log ("Você pode votar!");
+
+    } 
+    console.log ("1 = Candidato1, 2 = Candidato2, 3 = Candidato3, 4 = voto_nulo, 5 = voto_branco");
+
+   //let voto = +prompt ("Digite um dos númwros!");
+
+    if (voto === 1) {
+
+        console.log ("Você votou no candidato1!");
+        candidato1++
+
+    }
+    else if (voto === 2) {
+
+        console.log ("Você votou no candidato2!");
+        candidato2++
+    }
+    else if (voto === 3) {
+
+        console.log ("Você votou no candidato3!");
+        candidato3++
+    }
+    else if (voto === 4) {
+
+        console.log ("Seu voto é nulo!");
+        voto_nulo++
+    }
+    else{
+        console.log ("Você votou em branco!");
+        voto_branco++
+    
+    }
+
+}
+
+
+function exibirResultados () {
+
+    console.log (`O candidato 1 nomeado ${candidato1} votos!`);
+    console.log (`O candidato 2 nomeado ${candidato2} votos!`);
+    console.log (`O candidato 3 nomeado ${candidato3} votos!`);
+    console.log (`Foram contabilizados ${voto_nulo} votos nulos`);
+    console.log (`Foram contabilizados ${voto_branco} votos em branco!`);
+
+    if (candidato1> candidato2> candidato3) {
+
+        console.log ("Candidato 1 foi o grande vencedor!");
+    }
+    else if (candidato2> candidato1> candidato3) {
+
+        console.log ("O candidato 2 foi grande vencedor!");
+
+    }
+    else if (candidato3> candidato2> candidato1) {
+
+        console.log ("O candidato 3 foi o grande vencedor!");
+    }
+    else{
+
+        console.log ("Haverá segundo turno!");
+    }
+
+}
+
+while (pergunta === "sim") {
+    var anoNascimento = + prompt ("Qual seu ano de nascimento ??");
+    console.log ("Vamos computar seu voto!");
+    votacao ();
+    var pergunta = prompt ("Deseja votar?");
+
+}
+
+exibirResultados ();
